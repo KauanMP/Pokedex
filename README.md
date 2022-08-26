@@ -1,2 +1,2 @@
 # Pokedex
-Primeiros passos
+Projeto em aula usando C# aonde criaremos um site para pokedex
