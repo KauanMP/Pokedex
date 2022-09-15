@@ -13,7 +13,7 @@ namespace Pokedex.Models
 
         [Display(Name = "Pokemon Base")]
         public uint? EvolvedFrom { get; set; }
-        [ForeignKey("EnvolvedFrom")]
+        [ForeignKey("EvolvedFrom")]
         [Display(Name = "Pokemon Base")]
         public Pokemons? PokemonBase { get; set; }
 
@@ -22,7 +22,6 @@ namespace Pokedex.Models
         public uint GenerationId { get; set; }
         [ForeignKey("GenerationId")]
         public Generation Generation { get; set; } = new();
-
 
         [Display(Name = "Gênero")]
         [Required(ErrorMessage = "Por favor, informe a o Gênero")]
@@ -42,24 +41,23 @@ namespace Pokedex.Models
         [Display(Name = "Altura")]
         [Required(ErrorMessage = "Por favor, informe a Altura")]
         [Column(TypeName = "decimal5,2")]
-
         public double height { get; set; } = 0;
 
         [Display(Name = "Peso")]
         [Required(ErrorMessage = "Por favor, informe o peso")]
         [Column(TypeName = "decimal7,3")]
-
         public double weight { get; set; } = 0;
 
         [Display(Name = "Imagem")]
         [StringLength(200)]
-
         public string? Image { get; set; }
 
+        [Display(Name = "Imagem")]
+        [StringLength(200)]
+        public string? AnimatedImg { get; set; }
+
         public ICollection<PokemonAbilities> Abilities { get; set; } = new List<PokemonAbilities>();
-
         public ICollection<PokemonTypes> Types { get; set; } = new List<PokemonTypes>();
-
         public ICollection<Weaknesses> Weaknesses { get; set; } = new List<Weaknesses>();
     }
 }

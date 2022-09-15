@@ -1,0 +1,14 @@
+.card img{
+    background-color: rgba(211, 211, 211, 0.39);
+}
+
+.card:hover{
+    border: 3px solid rgb(170, 170, 170);
+    transform: scale(1.15);
+    transition: 1s;
+    z-index: 1000;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
