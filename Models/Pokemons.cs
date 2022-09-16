@@ -41,12 +41,12 @@ namespace Pokedex.Models
         [Display(Name = "Altura")]
         [Required(ErrorMessage = "Por favor, informe a Altura")]
         [Column(TypeName = "decimal5,2")]
-        public double height { get; set; } = 0;
+        public double Height { get; set; } = 0;
 
         [Display(Name = "Peso")]
         [Required(ErrorMessage = "Por favor, informe o peso")]
         [Column(TypeName = "decimal7,3")]
-        public double weight { get; set; } = 0;
+        public double Weight { get; set; } = 0;
 
         [Display(Name = "Imagem")]
         [StringLength(200)]
