@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Pokedex.Data;
 using Pokedex.Models;
 using Pokedex.ViewModels;
+using Pokedex.Data;
+using System.Linq;
 
 namespace Pokedex.Controllers;
 
@@ -24,25 +24,32 @@ public class HomeController : Controller
         ViewData["Types"] = _context.Types.ToList();
         var pokemons = _context.Pokemons
             .Include(p => p.Types)
-            .ThenInclude(t => t.Type).ToList();
+            .ThenInclude(t => t.Type)
+            .ToList();
         return View(pokemons);
     }
 
     public IActionResult Details(uint Number)
     {
         var current = _context.Pokemons
-            .Include(p => p.Types)
-            .ThenInclude(t => t.Type)
-            .Include(pokemon => pokemon.Generation)
-            .Include(pokemon => pokemon.Gender)
-            .Where(pokemon => pokemon.Number == Number)
-            .SingleOrDefault();
+            .Include(p => p.Types).ThenInclude(t => t.Type)
+            .Include(p => p.Generation).Include(p => p.Gender)
+            .Where(p => p.Number == Number).SingleOrDefault();
         var prior = _context.Pokemons
             .OrderByDescending(p => p.Number)
-            .Where(prior => prior.Number < Number).FirstOrDefault();
+            .Where(p => p.Number < Number).FirstOrDefault();
+        var next = _context.Pokemons
+            .OrderBy(p => p.Number)
+            .Where(p => p.Number > Number).FirstOrDefault();
+        var pokemon = new Details()
+        {
+            Prior = prior,
+            Current = current,
+            Next = next
+        };
         return View(pokemon);
     }
-    
+
     public IActionResult Privacy()
     {
         return View();
